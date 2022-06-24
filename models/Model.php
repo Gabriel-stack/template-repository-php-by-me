@@ -12,31 +12,46 @@ class Model extends Database
         parent::__construct();
     }
 
-    public function select($columns = '*') 
+    public function select(mixed $columns = ['*']) 
     {
-        $this->query = "SELECT $columns FROM $this->table";
+        $this->query = "SELECT ". implode(',' , $columns) .  " FROM $this->table ";
         return $this;
     }
 
-    public function update($columns = '*') 
+    public function update(mixed $columns = ['*']) 
     {
-        $this->query = "UPDATE $this->table SET $columns";
+        $this->query .= "UPDATE $this->table SET " . parse_array_to_string($columns) . " ";; 
         return $this;
     }
     public function where($column, $operator = '=', $value)
     {
-        $this->query .= " WHERE $column $operator '$value'";
+        $this->query .= "WHERE $column $operator '$value' ";
         return $this;
     }
 
     public function get()
     {
-       return $this->db->prepare($this->query)->execute()->fetchAll();
+        try
+        {
+            $result = $this->db->prepare($this->query)->execute();
+            return $result;
+        }
+        catch(PDOException $exception)
+        {
+            die($exception->getMessage());
+        }
     }
 
     public function first()
     {
-        return $this->db->prepare($this->query)->execute()->fetch();
+        try
+        {
+            return $this->db->prepare($this->query)->execute()->fetch();
+        }
+        catch(PDOException $exception)
+        {
+            die($exception->getMessage());
+        }
     }
 
 }
