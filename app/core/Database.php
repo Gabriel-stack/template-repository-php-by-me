@@ -1,6 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../config/consts.php';
+namespace app\core;
+
+use \PDO;
 
 class Database
 {
@@ -25,7 +27,7 @@ class Database
                 ]
             );
         }
-        catch(PDOException $exception)
+        catch(\PDOException $exception)
         {
             die($exception->getMessage());
         }

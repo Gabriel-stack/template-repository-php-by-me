@@ -1,11 +1,14 @@
 <?php
-require_once __DIR__ . '/models/Model.php';
-require_once __DIR__ . '/models/User.php';
-require_once __DIR__ . '/config/functions.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-$model = new User();
-$model = $model->where('id', '=', 1)->update();
-$var = ['name' => 'John', 'age' => '30'];
-$var2 = $model->select(['id'])->where('id','>', 1);
+use app\models\User;
+use app\models\Post;
 
-dd( $var2,parse_array_to_string($var));
+$user = new User();
+$post = new Post();
+
+$user = ['name'=> 'John Doe', 'email'=> 'john@eemail.com', 'password'=> password_hash('12345678', PASSWORD_DEFAULT)];
+attempt($user);
+$loggedUser = get('user');
+// $password = password_hash('12345678', PASSWORD_DEFAULT);
+dd($loggedUser);

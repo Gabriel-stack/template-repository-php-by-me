@@ -1,0 +1,26 @@
+{
+    "name": "gabriel-alves/template-to-projects-php",
+    "description": "a simple template to the other peoples to create simple projects in PHP.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+           "app\\": "app/"
+        },
+        "files": [
+            "config/auth.php", 
+            "config/consts.php",
+            "config/functions.php",
+            "config/session.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Gabriel Alves Martins",
+            "email": "gabriel.alves@ifsertao-pe.edu.br"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+
+    }
+}
